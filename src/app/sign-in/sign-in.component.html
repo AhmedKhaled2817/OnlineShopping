@@ -1,0 +1,83 @@
+<div class="auth-overlay" (click)="outSide($event)">
+  <mat-card class="auth-card" (click)="$event.stopPropagation()">
+    <button mat-icon-button type="button" class="close-btn" (click)="closeForm()" aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="auth-layout">
+      <form class="auth-form" [formGroup]="signInForm" (ngSubmit)="signIn()">
+        <div class="auth-heading">
+          <span class="eyebrow">Welcome back</span>
+          <h2>Sign In</h2>
+          <p>Access your account to shop, track orders, and checkout faster.</p>
+        </div>
+
+        @if (errAlert) {
+          <div class="auth-alert error" role="alert">
+            <mat-icon>error_outline</mat-icon>
+            <span>{{ errorSMS }}</span>
+          </div>
+        } @else if (successLogin) {
+          <div class="auth-alert success" role="status">
+            <mat-icon>check_circle</mat-icon>
+            <span>Signed in successfully</span>
+          </div>
+        }
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <mat-icon matPrefix>mail</mat-icon>
+          <input matInput type="email" formControlName="email" placeholder="you@example.com" />
+          @if (signInForm.controls.email.hasError('email') && signInForm.controls.email.touched) {
+            <mat-error>Enter a valid email</mat-error>
+          }
+          @if (signInForm.controls.email.hasError('required') && signInForm.controls.email.touched) {
+            <mat-error>Email is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input
+            matInput
+            [type]="hidePassword ? 'password' : 'text'"
+            formControlName="password"
+            placeholder="Your password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="hidePassword = !hidePassword"
+            [attr.aria-label]="hidePassword ? 'Show password' : 'Hide password'"
+          >
+            <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+          @if (signInForm.controls.password.hasError('required') && signInForm.controls.password.touched) {
+            <mat-error>Password is required</mat-error>
+          }
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" class="submit-btn" [disabled]="signInForm.invalid || isSubmitting">
+          @if (isSubmitting) {
+            <mat-spinner diameter="22"></mat-spinner>
+          } @else {
+            Sign In
+          }
+        </button>
+
+        <p class="auth-switch">
+          Don&apos;t have an account?
+          <button type="button" mat-button color="accent" (click)="change()">Create account</button>
+        </p>
+      </form>
+
+      <aside class="auth-aside">
+        <mat-icon>shopping_bag</mat-icon>
+        <h3>SHOPPING MALL</h3>
+        <p>Premium products, secure checkout, and curated deals — all in one place.</p>
+      </aside>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,17 @@
+.dialog-text {
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+:host ::ng-deep .auth-prime-dialog .p-dialog {
+  border: 1px solid var(--border);
+  background: var(--surface);
+}

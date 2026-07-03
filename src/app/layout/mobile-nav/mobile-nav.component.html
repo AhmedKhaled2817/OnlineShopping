@@ -1,0 +1,12 @@
+<nav class="mobile-nav" aria-label="Mobile navigation">
+  @for (link of links; track link.label) {
+    <a
+      [routerLink]="link.path"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: link.exact }"
+    >
+      <i class="fa-solid {{ link.icon }}"></i>
+      <span>{{ link.label }}</span>
+    </a>
+  }
+</nav>

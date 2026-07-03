@@ -1,0 +1,21 @@
+<section class="category-grid-section">
+  <div class="section-head container">
+    <div>
+      <span class="eyebrow">Categories</span>
+      <h2>Shop by Category</h2>
+    </div>
+    <p-button label="View all" [outlined]="true" icon="pi pi-th-large" routerLink="/shop" />
+  </div>
+
+  <div class="category-grid container">
+    @for (card of cards(); track card.name) {
+      <button type="button" class="category-card" (click)="onSelect(card.id)">
+        <span class="category-icon"><i class="fa-solid {{ card.icon }}"></i></span>
+        <span class="category-name">{{ card.name }}</span>
+        @if (card.count) {
+          <span class="category-count">{{ card.count }} items</span>
+        }
+      </button>
+    }
+  </div>
+</section>

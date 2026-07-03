@@ -1,0 +1,80 @@
+<app-sign-err></app-sign-err>
+<section class="cart-page">
+  <p-card styleClass="cart-hero-card">
+    <ng-template pTemplate="header">
+      <div class="cart-header">
+        <div>
+          <span class="eyebrow">Shopping Cart</span>
+          <h1>Your Bag</h1>
+        </div>
+        <p>Review your selections, adjust quantities, or complete checkout.</p>
+      </div>
+    </ng-template>
+  </p-card>
+
+  @if (isLoading) {
+    <p-card styleClass="status-card">
+      <p-skeleton height="2rem" styleClass="mb-2" />
+      <p-skeleton height="6rem" />
+    </p-card>
+  } @else if (hasCart) {
+    <div class="cart-grid">
+      <p-card styleClass="items-panel">
+        @for (item of cartList; track item._id) {
+          <article class="cart-item">
+            <img [src]="productImage(item)" [alt]="item.title" (error)="onProductImageError($event)" />
+            <div class="item-details">
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.description }}</p>
+              <div class="meta">
+                <p-tag [value]="item.category.name" severity="secondary" />
+                <span class="price">{{ item.price.current | currency }}</span>
+              </div>
+              <div class="quantity-control">
+                <p-button icon="pi pi-minus" [rounded]="true" [text]="true" (onClick)="changeQuantity(item, -1)" />
+                <span>{{ item.quantity }}</span>
+                <p-button icon="pi pi-plus" [rounded]="true" [text]="true" (onClick)="changeQuantity(item, 1)" />
+              </div>
+            </div>
+            <div class="item-actions">
+              <p class="subtotal">{{ item.price.current * item.quantity | currency }}</p>
+              <p-button
+                label="Remove"
+                icon="pi pi-trash"
+                severity="danger"
+                [outlined]="true"
+                (onClick)="removeItem(item._id)"
+              />
+            </div>
+          </article>
+        }
+        <p-button label="Clear cart" icon="pi pi-times" severity="secondary" [outlined]="true" (onClick)="removeAll()" />
+      </p-card>
+
+      <p-card header="Order summary" styleClass="summary-panel">
+        <div class="summary-row">
+          <span>Items total</span>
+          <strong>{{ total | currency }}</strong>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <strong>{{ total ? '$10.00' : '$0.00' }}</strong>
+        </div>
+        <div class="summary-row total-row">
+          <span>Total</span>
+          <strong>{{ (total + (total ? 10 : 0)) | currency }}</strong>
+        </div>
+        <p-button label="Checkout" icon="pi pi-credit-card" styleClass="w-full" (onClick)="checkout()" />
+        @if (message) {
+          <p-message [severity]="messageSeverity" [text]="message" styleClass="mt-3" />
+        }
+      </p-card>
+    </div>
+  } @else {
+    <p-card styleClass="empty-state">
+      <h2>Nothing in your cart yet</h2>
+      <p>{{ message || 'Add products to your cart and return here when ready.' }}</p>
+      <p-button label="Continue shopping" icon="pi pi-shopping-bag" routerLink="/shop" />
+    </p-card>
+  }
+</section>

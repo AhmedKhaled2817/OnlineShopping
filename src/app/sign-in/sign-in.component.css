@@ -1,0 +1,126 @@
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.auth-card {
+  position: relative;
+  width: min(920px, 100%);
+  padding: 0 !important;
+  border-radius: var(--radius-xl) !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+  color: var(--muted) !important;
+}
+
+.auth-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.auth-form {
+  display: grid;
+  gap: 1rem;
+  padding: 2rem;
+  align-content: start;
+}
+
+.auth-heading h2 {
+  margin: 0.35rem 0 0.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.85rem;
+}
+
+.auth-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.auth-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+}
+
+.auth-alert.error {
+  background: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+}
+
+.auth-alert.success {
+  background: rgba(34, 197, 94, 0.12);
+  color: #86efac;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 48px !important;
+  margin-top: 0.25rem;
+}
+
+.auth-switch {
+  margin: 0.5rem 0 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.auth-aside {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  background: linear-gradient(160deg, rgba(212, 175, 55, 0.28), rgba(10, 10, 10, 0.9));
+  border-left: 1px solid var(--border);
+}
+
+.auth-aside mat-icon {
+  font-size: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--accent);
+}
+
+.auth-aside h3 {
+  margin: 0;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+
+.auth-aside p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 260px;
+}
+
+@media (max-width: 768px) {
+  .auth-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-aside {
+    display: none;
+  }
+}

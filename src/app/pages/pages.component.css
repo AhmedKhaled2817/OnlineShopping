@@ -1,0 +1,57 @@
+.enterprise-page {
+  padding: 3rem 1rem;
+}
+
+.page-header {
+  max-width: 760px;
+  margin-bottom: 2rem;
+}
+
+.page-header .eyebrow {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.05;
+}
+
+.page-header p {
+  margin-top: 1rem;
+  color: var(--muted);
+  max-width: 720px;
+}
+
+.info-panel {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.info-list li {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.info-list li strong {
+  color: var(--text);
+}
+
+.page-actions {
+  margin-top: 2rem;
+}

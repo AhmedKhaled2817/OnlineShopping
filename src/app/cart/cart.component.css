@@ -1,0 +1,240 @@
+.cart-page {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+.cart-header {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+  padding: 1.75rem;
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.cart-header span {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cart-header h1 {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+}
+
+.cart-header p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.cart-grid {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 1.5rem;
+}
+
+.items-panel,
+.summary-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.item-details h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.item-details p {
+  margin: 0 0 0.75rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--muted-soft);
+  font-size: 0.88rem;
+}
+
+.quantity-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.65rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+}
+
+.quantity-control button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+}
+
+.quantity-control span {
+  min-width: 28px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.item-actions {
+  text-align: right;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.subtotal {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.remove-btn {
+  border: 1px solid rgba(255, 80, 80, 0.35);
+  background: rgba(255, 80, 80, 0.12);
+  color: #ff8a8a;
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--radius-md);
+}
+
+.clear-cart,
+.checkout-btn,
+.shop-button {
+  width: 100%;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.95rem 1rem;
+  font-weight: 700;
+}
+
+.clear-cart {
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.summary-card {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.summary-card h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.total-row {
+  border-bottom: none;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.total-row strong {
+  color: var(--accent);
+}
+
+.checkout-btn {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.message-card,
+.status-card,
+.empty-state {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  background: var(--accent-muted);
+  border: 1px solid var(--border);
+}
+
+.status-card p,
+.message-card p,
+.empty-state p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+}
+
+.empty-state h2 {
+  margin-bottom: 0.65rem;
+}
+
+.shop-button {
+  display: inline-flex;
+  justify-content: center;
+  background: var(--accent);
+  color: var(--on-accent);
+  margin-top: 1rem;
+  width: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (max-width: 980px) {
+  .cart-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .cart-item {
+    grid-template-columns: 1fr;
+  }
+
+  .item-actions {
+    text-align: left;
+  }
+}

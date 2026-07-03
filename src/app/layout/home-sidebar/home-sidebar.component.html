@@ -1,0 +1,55 @@
+<aside class="home-sidebar">
+  <p-card styleClass="sidebar-card">
+    <ng-template pTemplate="header">
+      <div class="card-head-row">
+        <span>Cart Summary</span>
+        <a routerLink="/cart" class="view-link">View all</a>
+      </div>
+    </ng-template>
+
+    @if (isLoading) {
+      <p-skeleton height="4rem" styleClass="mb-2" />
+      <p-skeleton height="4rem" />
+    } @else if (hasCart) {
+      <ul class="cart-lines">
+        @for (item of cartItems; track item._id) {
+          <li>
+            <img [src]="productImage(item)" [alt]="item.title" (error)="onProductImageError($event)" />
+            <div>
+              <strong>{{ item.title }}</strong>
+              <span>{{ item.quantity }} × {{ item.price.current | currency }}</span>
+            </div>
+          </li>
+        }
+      </ul>
+      <div class="cart-totals">
+        <div><span>Subtotal</span><strong>{{ subtotal | currency }}</strong></div>
+        <div>
+          <span>Shipping</span>
+          <strong>{{ shipping ? (shipping | currency) : 'Free' }}</strong>
+        </div>
+        <div class="total-line"><span>Total</span><strong>{{ total | currency }}</strong></div>
+      </div>
+      <p-button label="Checkout" icon="pi pi-credit-card" styleClass="w-full" routerLink="/cart" />
+    } @else {
+      <p class="widget-muted">Your cart is empty. Add products to see them here.</p>
+      <p-button label="Start shopping" icon="pi pi-shopping-bag" routerLink="/shop" />
+    }
+  </p-card>
+
+  <p-card header="Why Choose Us?" styleClass="sidebar-card">
+    <ul class="why-list">
+      <li><i class="pi pi-star-fill"></i><span>Premium quality products</span></li>
+      <li><i class="pi pi-truck"></i><span>Fast & reliable delivery</span></li>
+      <li><i class="pi pi-replay"></i><span>Easy 30-day returns</span></li>
+      <li><i class="pi pi-lock"></i><span>Secure payment methods</span></li>
+    </ul>
+  </p-card>
+
+  <p-card styleClass="sidebar-card offer-card">
+    <p-tag severity="warn" value="Limited time" />
+    <h3>Special Offer</h3>
+    <p>Get <strong>20% off</strong> your first order with code <code>SAVE20</code></p>
+    <p-button label="Shop Now" icon="pi pi-gift" routerLink="/shop" />
+  </p-card>
+</aside>

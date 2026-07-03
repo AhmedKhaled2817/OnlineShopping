@@ -1,0 +1,61 @@
+<section class="best-seller-products">
+  @if (isLoading) {
+    <div class="product-grid">
+      @for (item of [1, 2, 3, 4]; track item) {
+        <article class="product-card loading-card"></article>
+      }
+    </div>
+  } @else if (productList.length) {
+    <div class="product-grid">
+      @for (item of productList; track item._id) {
+        <article class="product-card">
+          <div class="card-header-media">
+            <a [routerLink]="'/details/' + item._id" [attr.aria-label]="item.title">
+              <img [src]="productImage(item)" [alt]="item.title" (error)="onProductImageError($event)" />
+            </a>
+            <div class="media-actions">
+              @if (item.price.discountPercentage && item.price.discountPercentage > 0) {
+                <p-tag severity="warn" [value]="'-' + item.price.discountPercentage + '%'" />
+              }
+              <p-button
+                [text]="true"
+                [rounded]="true"
+                icon="pi pi-heart"
+                severity="secondary"
+                styleClass="wishlist-fab"
+                [class.filled]="isFavorite(item._id)"
+                (onClick)="toggleFavorite(item, $event)"
+                ariaLabel="Wishlist"
+              />
+            </div>
+          </div>
+
+          <div class="product-body">
+            <span class="category-label">{{ item.category.name }}</span>
+            <h4 class="product-title">{{ item.title }}</h4>
+            <p-rating [ngModel]="roundedRating(item.rating)" [readonly]="true" [stars]="5" />
+            <div class="product-footer">
+              <div class="price-block">
+                <strong>{{ item.price.current | currency: item.price.currency }}</strong>
+                @if (item.price.current != item.price.beforeDiscount) {
+                  <span>{{ item.price.beforeDiscount | currency: item.price.currency }}</span>
+                }
+              </div>
+              <p-button
+                icon="pi pi-cart-plus"
+                [rounded]="true"
+                (onClick)="addToCart(item._id)"
+                ariaLabel="Add to cart"
+              />
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="empty-products">
+      <i class="pi pi-box"></i>
+      <p>{{ errorMessage || 'No featured products available right now.' }}</p>
+    </div>
+  }
+</section>

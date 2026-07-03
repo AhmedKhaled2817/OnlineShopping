@@ -1,0 +1,52 @@
+.enterprise-page {
+  padding: 3rem 1rem;
+}
+
+.contact-card {
+  max-width: 840px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+
+.contact-card h1 {
+  margin-top: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.contact-card p {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.contact-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.contact-details div {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+
+.contact-details h4 {
+  margin: 0 0 0.5rem;
+  color: var(--accent);
+}
+
+.contact-details p {
+  margin: 0;
+  color: var(--text);
+}
+
+.page-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-start;
+}

@@ -1,0 +1,34 @@
+<section class="wishlist-page container">
+  <header class="page-header">
+    <span class="eyebrow">Wishlist</span>
+    <h1>Your favorite products</h1>
+    <p>Review items you marked as favorites and manage your wishlist from here.</p>
+  </header>
+
+  @if (favorites.length) {
+    <div class="wishlist-grid">
+      @for (item of favorites; track item._id) {
+        <article class="wishlist-card">
+          <a [routerLink]="'/details/' + item._id" class="wishlist-media">
+            <img [src]="item.thumbnail || item.category.image" [alt]="item.title" />
+          </a>
+          <div class="wishlist-body">
+            <h3>{{ item.title }}</h3>
+            <span>{{ item.brand }}</span>
+            <p>{{ item.description | truncate:120 }}</p>
+            <div class="wishlist-meta">
+              <strong>{{ item.price.current | currencyFormat:item.price.currency }}</strong>
+              <p-button label="Remove" icon="pi pi-times" severity="secondary" (onClick)="remove(item._id)"></p-button>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="empty-wishlist">
+      <i class="pi pi-heart"></i>
+      <h3>Your wishlist is empty</h3>
+      <p>Add your favorite items by clicking the heart icon on any product.</p>
+    </div>
+  }
+</section>

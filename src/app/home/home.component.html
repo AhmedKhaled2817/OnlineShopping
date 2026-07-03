@@ -1,0 +1,24 @@
+<app-banner></app-banner>
+<app-feature-bar></app-feature-bar>
+
+<div class="home-layout container">
+  <div class="home-main">
+    <app-category-grid
+      [categories]="categories()"
+      (categorySelect)="goToCategory($event)"
+    ></app-category-grid>
+
+    <section class="home-products-block">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Best selling</span>
+          <h2>Best Selling Products</h2>
+        </div>
+        <p-button label="View all" icon="pi pi-arrow-right" [outlined]="true" routerLink="/shop" />
+      </div>
+      <app-several-products></app-several-products>
+    </section>
+  </div>
+
+  <app-home-sidebar class="home-aside"></app-home-sidebar>
+</div>

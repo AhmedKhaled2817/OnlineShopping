@@ -1,0 +1,81 @@
+<nav class="site-nav">
+  <div class="nav-left">
+    <p-button
+      class="menu-toggle"
+      [text]="true"
+      icon="pi pi-bars"
+      (onClick)="toggleMobileMenu()"
+      [attr.aria-expanded]="mobileMenuOpen"
+      ariaLabel="Toggle menu"
+    />
+
+    <a routerLink="/" class="nav-brand">
+      <span class="brand-mark"><i class="fa-solid fa-bag-shopping"></i></span>
+      <div>
+        <strong>SHOPPING MALL</strong>
+        <small>Premium E-Commerce</small>
+      </div>
+    </a>
+  </div>
+
+  <div class="nav-center" [class.open]="mobileMenuOpen">
+    <div class="nav-links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a routerLink="/shop" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Shop</a>
+      <a routerLink="/categories" routerLinkActive="active">Categories</a>
+      <a routerLink="/deals" routerLinkActive="active">Deals</a>
+      <a routerLink="/pages" routerLinkActive="active">Pages</a>
+      <a routerLink="/contact" routerLinkActive="active">Contact</a>
+    </div>
+  </div>
+
+  <div class="nav-right">
+    <p-iconfield class="nav-search desktop-search">
+      <p-inputicon class="pi pi-search" />
+      <input
+        type="search"
+        pInputText
+        placeholder="Search products..."
+        #searchInput
+        (keyup.enter)="onSearchValue(searchInput.value)"
+      />
+    </p-iconfield>
+
+    <div class="nav-actions">
+      <a routerLink="/wishlist" class="desktop-only nav-icon-link">
+        <p-button [text]="true" [rounded]="true" icon="pi pi-heart" ariaLabel="Wishlist"></p-button>
+      </a>
+      <p-button
+        [text]="true"
+        [rounded]="true"
+        icon="pi pi-shopping-cart"
+        ariaLabel="Cart"
+        (onClick)="goToCart()"
+      />
+
+      @if (!isLoggedIn) {
+        <p-button class="desktop-only" label="Sign in" (onClick)="signInForm()" />
+        <p-button class="desktop-only" label="Register" severity="secondary" (onClick)="showRegister()" />
+      } @else {
+        <a routerLink="/profile" class="profile-link" [attr.aria-label]="userName">
+          @if (userImg) {
+            <img [src]="userImg" alt="" />
+          } @else {
+            <i class="fa-solid fa-user"></i>
+          }
+        </a>
+      }
+    </div>
+  </div>
+</nav>
+
+@if (isSignShow) {
+  <app-sign-in
+    (closeEmit)="closeForm($event)"
+    (changeEmit)="showRegister()"
+    (loggedEmit)="loggedIn($event)"
+  ></app-sign-in>
+}
+@if (isRegisterShow) {
+  <app-sign-up (closeEmit)="closeRegister($event)"></app-sign-up>
+}

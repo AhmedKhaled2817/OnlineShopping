@@ -1,0 +1,135 @@
+<header class="shop-hero">
+  <div class="hero-copy">
+    <span class="hero-eyebrow">Collection</span>
+    <h1>Explore curated products, trending deals and premium collections.</h1>
+    <p>Filter by categories, discover new arrivals, and shop with confidence in a modern dark storefront.</p>
+  </div>
+  <p-button label="Back to home" icon="pi pi-arrow-left" [routerLink]="['/']"></p-button>
+</header>
+
+<article>
+  <div class="sidebar">
+    <app-sidebar
+      (sendBrands)="switchBrands($event)"
+      (sendAllProducts)="showProducts(1, pageSize)"
+      (sendFilterData)="filterProducts($event)"
+      (sendSearchInfo)="search($event)"
+    ></app-sidebar>
+  </div>
+
+  <section class="shop-main container">
+    <div class="categories-row">
+      @for (item of categories; track $index) {
+        <button type="button" class="category-chip" (click)="showByCategory(item.id, currentPage)">
+          <img [src]="item.image" [alt]="item.name" class="category-thumb" />
+          <span>{{ item.name }}</span>
+        </button>
+      }
+    </div>
+
+    @if (errorMessage) {
+      <p-message severity="warn" [text]="errorMessage"></p-message>
+    }
+
+    @if (isLoading) {
+      <div class="product-grid">
+        @for (item of [1, 2, 3, 4, 5, 6, 7, 8]; track item) {
+          <article class="product-card product-card-skeleton">
+            <p-skeleton height="220px"></p-skeleton>
+            <div class="product-card-body">
+              <p-skeleton height="1.4rem" width="80%"></p-skeleton>
+              <p-skeleton height="4rem"></p-skeleton>
+              <p-skeleton height="2rem" width="60%"></p-skeleton>
+            </div>
+          </article>
+        }
+      </div>
+    } @else if (productList.length) {
+      <div class="product-grid">
+        @for (item of productList; track item._id) {
+          <article class="product-card">
+            <a class="product-media" [routerLink]="'/details/' + item._id" [attr.aria-label]="item.title">
+              <img [src]="productImage(item)" [alt]="item.title" (error)="onProductImageError($event)" />
+              <div class="product-badges">
+                @if (item.stock <= 0) {
+                  <p-tag severity="danger" value="Out of Stock"></p-tag>
+                } @else {
+                  <p-tag severity="success" [value]="item.stock + ' in stock'"></p-tag>
+                }
+                @if (item.price.discountPercentage > 0) {
+                  <p-tag severity="warn" [value]="'-' + item.price.discountPercentage + '%'"></p-tag>
+                }
+              </div>
+            </a>
+
+            <div class="favorite-action">
+              <p-button
+                [text]="true"
+                [rounded]="true"
+                icon="pi pi-heart"
+                class="favorite-btn"
+                [class.filled]="isFavorite(item._id)"
+                (onClick)="toggleFavorite(item, $event)"
+                ariaLabel="Toggle favorite"
+              ></p-button>
+            </div>
+
+            <div class="product-card-body">
+              <div class="product-meta">
+                <span>{{ item.category.name }}</span>
+                <span>{{ item.brand }}</span>
+              </div>
+              <h4>{{ item.title }}</h4>
+              <p class="shop-desc">{{ item.description | truncate:120 }}</p>
+              <div class="shop-price">
+                <strong>{{ item.price.current | currencyFormat:item.price.currency }}</strong>
+                @if (item.price.current != item.price.beforeDiscount) {
+                  <span>{{ item.price.beforeDiscount | currencyFormat:item.price.currency }}</span>
+                }
+              </div>
+            </div>
+
+            <div class="product-actions">
+              <p-button
+                label="View details"
+                icon="pi pi-eye"
+                [outlined]="true"
+                [routerLink]="'/details/' + item._id"
+              ></p-button>
+            </div>
+          </article>
+        }
+      </div>
+    } @else {
+      <div class="empty-products">
+        <i class="pi pi-shopping-bag"></i>
+        <h3>No products found</h3>
+        <p>Try changing the category, brand, or filter values.</p>
+      </div>
+    }
+
+    <div class="bottomArea">
+      <p-paginator
+        [rows]="pageSize || 15"
+        [totalRecords]="totalSize || 0"
+        [first]="(currentPage - 1) * (pageSize || 15)"
+        (onPageChange)="onPageChange($event)"
+      ></p-paginator>
+
+      @if (productList.length > 10) {
+        <div class="sizePerPage">
+          <label for="pageSizeSelect">Items per page</label>
+          <p-select
+            inputId="pageSizeSelect"
+            [options]="pageSizeOptions"
+            [(ngModel)]="pageSize"
+            optionLabel="label"
+            optionValue="value"
+            (onChange)="changePageSize()"
+            placeholder="Select"
+          ></p-select>
+        </div>
+      }
+    </div>
+  </section>
+</article>

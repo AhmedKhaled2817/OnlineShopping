@@ -1,0 +1,24 @@
+.not-found-page {
+  padding: 4rem 1rem;
+}
+
+.not-found-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.not-found-card h1 {
+  margin: 0;
+  font-size: clamp(4rem, 8vw, 7rem);
+}
+
+.not-found-card p {
+  color: var(--muted);
+  line-height: 1.75;
+  margin: 1rem 0 2rem;
+}

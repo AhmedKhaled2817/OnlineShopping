@@ -1,0 +1,33 @@
+<footer class="site-footer">
+  <div class="footer-inner container">
+    <div class="footer-brand">
+      <strong>SHOPPING MALL</strong>
+      <p>Premium dark storefront experience with curated products and secure checkout.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Shop</h4>
+      <a routerLink="/shop">All Products</a>
+      <a routerLink="/categories">Categories</a>
+      <a routerLink="/deals">Deals</a>
+    </div>
+    <div class="footer-links">
+      <h4>Account</h4>
+      <a routerLink="/cart">Cart</a>
+      <a routerLink="/profile">Profile</a>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <p>support&#64;shoppingmall.com</p>
+      <p>+1 (800) 555-0199</p>
+    </div>
+  </div>
+  <div class="footer-map container">
+    <iframe
+      title="Store location"
+      [src]="mapUrl | safeUrl"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+  <p class="footer-copy container">© {{ year }} Shopping Mall. All rights reserved.</p>
+</footer>

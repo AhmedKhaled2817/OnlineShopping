@@ -1,0 +1,13 @@
+<section class="feature-bar" aria-label="Store benefits">
+  <div class="feature-bar-inner container">
+    @for (item of features; track item.title) {
+      <article>
+        <i class="fa-solid {{ item.icon }}"></i>
+        <div>
+          <strong>{{ item.title }}</strong>
+          <span>{{ item.text }}</span>
+        </div>
+      </article>
+    }
+  </div>
+</section>
