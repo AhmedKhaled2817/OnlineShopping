@@ -1,23 +1,14 @@
-<header class="shop-hero">
-  <div class="hero-copy">
-    <span class="hero-eyebrow">Collection</span>
-    <h1>Explore curated products, trending deals and premium collections.</h1>
-    <p>Filter by categories, discover new arrivals, and shop with confidence in a modern dark storefront.</p>
-  </div>
-  <p-button label="Back to home" icon="pi pi-arrow-left" [routerLink]="['/']"></p-button>
-</header>
+  <article>
+    <div class="sidebar">
+      <app-sidebar
+        (sendBrands)="switchBrands($event)"
+        (sendAllProducts)="showProducts(1, pageSize)"
+        (sendFilterData)="filterProducts($event)"
+        (sendSearchInfo)="search($event)"
+      ></app-sidebar>
+    </div>
 
-<article>
-  <div class="sidebar">
-    <app-sidebar
-      (sendBrands)="switchBrands($event)"
-      (sendAllProducts)="showProducts(1, pageSize)"
-      (sendFilterData)="filterProducts($event)"
-      (sendSearchInfo)="search($event)"
-    ></app-sidebar>
-  </div>
-
-  <section class="shop-main container">
+    <section class="shop-main container">
     <div class="categories-row">
       @for (item of categories; track $index) {
         <button type="button" class="category-chip" (click)="showByCategory(item.id, currentPage)">
@@ -132,4 +123,4 @@
       }
     </div>
   </section>
-</article>
+  </article>
