@@ -1,27 +1,64 @@
 # OnlineShopping
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.10.
+A modern Angular-based e-commerce storefront built with Angular 21 and PrimeNG. The app includes a shopping home page, product catalog, category browsing, deals, contact page, wishlist, cart flow, and secure profile access.
 
-## Development server
+## Project structure
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- `src/app/home` - homepage and featured product cards
+- `src/app/shop` - shop listing, product details, filters, and pagination
+- `src/app/categories`, `src/app/deals`, `src/app/pages`, `src/app/contact` - standalone content pages
+- `src/app/core` - reusable services, guards, pipes, and shared state
+- `src/app/features/wishlist` - wishlist page and favorite handling
+- `src/app/navbar`, `src/app/sidebar`, `src/app/layout` - navigation, sidebar, and responsive UI components
 
-## Code scaffolding
+## Key features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Standalone Angular components with route-based navigation
+- Favorites / wishlist management persisted in `localStorage`
+- Authentication guard for protected profile access
+- Responsive UI with PrimeNG components
+- Search, category filtering, and pagination for product browsing
+- Vercel-compatible build configuration
 
-## Build
+## Prerequisites
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Node.js 20+ recommended
+- npm 10+ recommended
+- Angular CLI installed globally if using `ng` commands directly
 
-## Running unit tests
+## Install dependencies
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+npm install
+```
 
-## Running end-to-end tests
+## Run locally
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm start
+```
 
-## Further help
+Then open `http://localhost:4200/`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Build for production
+
+```bash
+npm run build
+```
+
+## Notes for deployment
+
+- Ensure `package.json` and `package-lock.json` are both committed
+- Remove unsupported packages on Linux hosts, such as `cursor-reset-tool`
+- Deploy with Vercel or any static hosting provider that supports Angular builds
+
+## Useful commands
+
+- `npm start` - start dev server
+- `npm run build` - production build
+- `npm test` - run unit tests
+- `npx ng lint` - lint project (if configured)
+
+## Troubleshooting
+
+If Vercel install fails due to unsupported platform packages, remove the offending dependency from `package.json` and reinstall.
